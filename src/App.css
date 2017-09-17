@@ -29,3 +29,7 @@
   top: 5px;
   fill: hsl(171, 100%, 41%);
 }
+
+.clickable {
+  cursor: pointer;
+}

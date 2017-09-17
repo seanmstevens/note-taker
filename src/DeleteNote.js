@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 
 export class DeleteNote extends Component {
   render() {
-    let opacity = this.props.visible ? { opacity: '1' } : { opacity: '0' };
+    const { visible, listIndex, index, onClick } = this.props;
+
+    let opacity = visible ? { opacity: '1' } : { opacity: '0' };
 
     return (
-      <button className="delete is-small note-delete" style={ opacity }></button>
+      <button 
+        className="delete is-small note-delete" 
+        style={ opacity }
+        onClick={(e) => onClick(listIndex, index, true)}>
+      </button>
     );
   }
 }

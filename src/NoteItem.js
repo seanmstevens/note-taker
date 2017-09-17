@@ -26,15 +26,18 @@ export class NoteItem extends Component {
   }
 
   render() {
-    const title = this.props.title;
-    const body = this.props.body;
+    const { listIndex, index, title, body, onDeleteNote } = this.props;
 
     return (
       <div className="content is-small note-item" 
         onMouseEnter={this.handleMouseEnter} 
         onMouseLeave={this.handleMouseLeave}>
         <h4 className="has-text-grey note-title">{title}</h4>
-        <DeleteNote visible={this.state.deleteVisible}/>
+        <DeleteNote 
+          visible={this.state.deleteVisible}
+          listIndex={listIndex}
+          index={index}
+          onClick={onDeleteNote}/>
         <p className="has-text-light-grey">{body}</p>
       </div>
     );
