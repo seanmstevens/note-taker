@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ViewingPanel } from './ViewingPanel';
 import { NoteList } from './NoteList';
+import { AddNote } from './AddNote';
 import '../node_modules/bulma/css/bulma.css';
 import './App.css';
 
@@ -21,15 +22,19 @@ class App extends Component {
           body: "Another note. Whoa!",
           deleted: false
         }]
+      }, {
+        name: "LC101 Lecture Notes",
+        urlName: "lc101",
+        notes: []
       }]
     }
 
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
-    this.handleAddNote = this.handleAddNote.bind(this);
+    this.handleAddNoteInfo = this.handleAddNoteInfo.bind(this);
   }
 
-  handleAddNote(listIndex, title, body) {
-    console.log('note added!');
+  handleAddNoteInfo(listIndex, title, body) {
+    console.log('note added!', listIndex, title, body);
 
     const nextLists = this.state.categories.map((list, idx) => {
       if (idx !== listIndex) {
@@ -37,12 +42,14 @@ class App extends Component {
       }
       return Object.assign({}, list, {
         notes: list.notes.concat({
-          title,
-          body,
+          title: title,
+          body: body,
           deleted: false
         })
       });
     });
+
+    console.log(nextLists);
 
     this.setState({
       categories: nextLists
@@ -50,8 +57,6 @@ class App extends Component {
   }
 
   handleDeleteNote(listIndex, index, value) {
-    console.log('clicked!');
-
     this.setState({
       categories: this.state.categories.map((list, idx) => {
         if (idx !== listIndex) {
@@ -60,10 +65,8 @@ class App extends Component {
         return Object.assign({}, list, {
           notes: list.notes.map((note, idx) => {
             if (idx !== index) {
-              console.log(note);
               return note;
             }
-
             return Object.assign({}, note, { deleted: true });
           })
         })
@@ -87,18 +90,24 @@ class App extends Component {
             <div className="tile is-child">
               {this.state.categories.map((list, index) => {
                 return <NoteList
+                  key={index}
                   index={index}
                   name={list.name}
                   notes={list.notes}
                   onDeleteNote={this.handleDeleteNote}
-                  onAddNote={this.handleAddNote}
                 />
               })}
+              <div className="columns is-centered is-marginless">
+                <AddNote
+                  onAddNote={this.handleAddNote}/>
+              </div>
             </div>
           </div>
           <div className="tile is-parent">
             <div className="tile is-child">
-              <ViewingPanel/>
+              <ViewingPanel
+                categoryList={this.state.categories}
+                onSubmit={this.handleAddNoteInfo}/>
             </div>
           </div>
         </div>

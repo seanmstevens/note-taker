@@ -6,7 +6,9 @@ export class ViewingPanel extends Component {
     super(props);
 
     this.state = {
-      currentView: <NoteInputForm/>
+      currentView: <NoteInputForm 
+                      categoryList={this.props.categoryList}
+                      onSubmit={this.props.onSubmit}/>
     };
 
     this.changeView = this.changeView.bind(this);
