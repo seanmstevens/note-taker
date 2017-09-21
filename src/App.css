@@ -1,14 +1,14 @@
 .note-item {
   box-sizing: border-box;
   padding: 0.5rem;
-  border-left: 0.5rem solid transparent;
+  border-left: 0.33rem solid transparent;
   margin-bottom: 0 !important;
   transition: all 120ms ease-in-out;
   cursor: pointer;
 }
 
 .note-item:hover {
-  background-color: #d7f9f4;
+  background-color: #e8f9f6;
   border-color: hsl(171, 100%, 41%);
 }
 

@@ -52,7 +52,7 @@ export class NoteInputForm extends Component {
   }
 
   changeCategory(e) {
-    const index = e.target.value;
+    const index = Number(e.target.value);
     this.setState({
       listIndex: index
     });

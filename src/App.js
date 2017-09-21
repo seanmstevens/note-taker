@@ -26,16 +26,21 @@ class App extends Component {
         name: "LC101 Lecture Notes",
         urlName: "lc101",
         notes: []
-      }]
-    }
+      }],
+      currentView: "NoteView",
+      currentNote: {
+        title: "Example Note",
+        body: "Meow meow instantly break out into full speed gallop across the house for no reason.",
+        category: "General Notes"
+      }
+    };
 
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
-    this.handleAddNoteInfo = this.handleAddNoteInfo.bind(this);
+    this.handleAddNoteInfo = this.handleAddNoteInfo.bind(this)
+    this.handleChangeView = this.handleChangeView.bind(this);
   }
 
   handleAddNoteInfo(listIndex, title, body) {
-    console.log('note added!', listIndex, title, body);
-
     const nextLists = this.state.categories.map((list, idx) => {
       if (idx !== listIndex) {
         return list;
@@ -48,8 +53,6 @@ class App extends Component {
         })
       });
     });
-
-    console.log(nextLists);
 
     this.setState({
       categories: nextLists
@@ -74,6 +77,24 @@ class App extends Component {
     });
   }
 
+  handleChangeView(view, title, body, listIndex) {
+    title = title || "";
+    body = body || "";
+    listIndex = listIndex || 0;
+
+    this.setState({
+      categories: Array.from(
+        this.state.categories
+      ),
+      currentView: view,
+      currentNote: {
+        title: title,
+        body: body,
+        category: this.state.categories[listIndex].name
+      }
+    });
+  }
+
   render() {
     return (
       <div className="container">
@@ -95,11 +116,12 @@ class App extends Component {
                   name={list.name}
                   notes={list.notes}
                   onDeleteNote={this.handleDeleteNote}
+                  onShowNote={this.handleChangeView}
                 />
               })}
               <div className="columns is-centered is-marginless">
                 <AddNote
-                  onAddNote={this.handleAddNote}/>
+                  onShowForm={this.handleChangeView}/>
               </div>
             </div>
           </div>
@@ -107,7 +129,11 @@ class App extends Component {
             <div className="tile is-child">
               <ViewingPanel
                 categoryList={this.state.categories}
-                onSubmit={this.handleAddNoteInfo}/>
+                onSubmit={this.handleAddNoteInfo}
+                currentView={this.state.currentView}
+                noteTitle={this.state.currentNote.title}
+                noteBody={this.state.currentNote.body}
+                noteCategory={this.state.currentNote.category}/>
             </div>
           </div>
         </div>

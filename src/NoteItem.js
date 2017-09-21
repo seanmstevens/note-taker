@@ -11,18 +11,27 @@ export class NoteItem extends Component {
 
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleMouseEnter(e) {
+  handleMouseEnter() {
     this.setState({
       deleteVisible: true
     });
   }
 
-  handleMouseLeave(e) {
+  handleMouseLeave() {
     this.setState({
       deleteVisible: false
     });
+  }
+
+  handleClick() {
+    const newView = "NoteView",
+          title = this.props.title,
+          body = this.props.body,
+          listIndex = this.props.listIndex;
+    this.props.onClick(newView, title, body, listIndex);
   }
 
   render() {
@@ -31,7 +40,8 @@ export class NoteItem extends Component {
     return (
       <div className="content is-small note-item" 
         onMouseEnter={this.handleMouseEnter} 
-        onMouseLeave={this.handleMouseLeave}>
+        onMouseLeave={this.handleMouseLeave}
+        onClick={this.handleClick}>
         <h4 className="has-text-grey note-title">{title}</h4>
         <DeleteNote 
           visible={this.state.deleteVisible}

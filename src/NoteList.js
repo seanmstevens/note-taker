@@ -4,7 +4,7 @@ import { NoteItem } from './NoteItem';
 export class NoteList extends Component {
 
   render() {
-    const { index, name, notes, onDeleteNote } = this.props;
+    const { index, name, notes, onDeleteNote, onShowNote } = this.props;
 
     return (
       <div>
@@ -21,6 +21,7 @@ export class NoteList extends Component {
                   title={note.title}
                   body={note.body}
                   onDeleteNote={onDeleteNote}
+                  onClick={onShowNote}
                 />
               }
               return false;
