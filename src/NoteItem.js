@@ -31,7 +31,7 @@ export class NoteItem extends Component {
           title = this.props.title,
           body = this.props.body,
           listIndex = this.props.listIndex;
-    this.props.onClick(newView, listIndex, title, body);
+    this.props.onClick(newView, listIndex, false, title, body);
   }
 
   render() {

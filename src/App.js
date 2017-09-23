@@ -101,11 +101,14 @@ class App extends Component {
                    isAddingNote,
                    title, 
                    body) {
-    console.log(listIndex);
 
     title = isAddingNote ? title : this.state.currentNote.title;
     body = isAddingNote ? body : this.state.currentNote.body;
-    const category = isAddingNote ? this.state.categories[listIndex].name : this.state.currentNote.category;
+    const category = isAddingNote 
+      ? this.state.categories[listIndex].name 
+      : this.state.currentNote.category;
+
+    console.log(title, body);
 
     this.setState({
       categories: this.state.categories,
