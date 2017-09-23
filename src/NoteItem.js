@@ -41,7 +41,7 @@ export class NoteItem extends Component {
       <div className="content is-small note-item" 
         onMouseEnter={this.handleMouseEnter} 
         onMouseLeave={this.handleMouseLeave}
-        onClick={this.handleClick}>
+        onClickCapture={this.handleClick}>
         <h4 className="has-text-grey note-title">{title}</h4>
         <DeleteNote 
           visible={this.state.deleteVisible}

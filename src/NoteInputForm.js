@@ -52,7 +52,7 @@ export class NoteInputForm extends Component {
   }
 
   changeCategory(e) {
-    const index = Number(e.target.value);
+    const index = Number(e.target.id);
     this.setState({
       listIndex: index
     });
@@ -64,19 +64,17 @@ export class NoteInputForm extends Component {
         <div className="field is-grouped">
           <div className="control is-expanded">
             <input 
-              className="input is-small" 
+              className="input" 
               type="text"
               placeholder="Note title"
               onChange={e => this.changeTitle(e)}
             />
           </div>
           <div className="control">
-            <div className="select is-small">
-              <CategorySelector 
-                categoryList={this.props.categoryList}
-                onChange={this.changeCategory}
-              />
-            </div>
+            <CategorySelector 
+              categoryList={this.props.categoryList}
+              onChange={this.changeCategory}
+            />
           </div>
         </div>
         <div className="field">

@@ -33,3 +33,13 @@
 .clickable {
   cursor: pointer;
 }
+
+.smaller {
+  width: 18px;
+  height: 18px;
+}
+
+.dropdown-item:hover {
+  background-color: whitesmoke;
+  color: #0a0a0a;
+}
