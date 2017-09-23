@@ -13,6 +13,9 @@ export class CategoryNav extends Component {
   }
 
   handleClick(index) {
+    this.setState({
+      activeTab: index
+    });
     this.props.onSwitch("NoteView", index, false);
   }
 
@@ -20,11 +23,12 @@ export class CategoryNav extends Component {
     const categories = this.props.categoryList;
 
     return (
-        <nav className="breadcrumb" aria-label="breadcrumbs">
+        <nav className="breadcrumb is-medium" aria-label="breadcrumbs">
           <ul>
             {categories.map((value, index) => {
               return(
                 <li 
+                  className={(index === this.state.activeTab ? "is-active" : "")}
                   key={index}
                   onClick={() => this.handleClick(index)}>
                   <Link to={`/${value.urlName}`}>

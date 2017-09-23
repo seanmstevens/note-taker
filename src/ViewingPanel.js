@@ -13,6 +13,7 @@ export class ViewingPanel extends Component {
     : <NoteInputForm
         categoryList={this.props.categoryList}
         onSubmit={this.props.onSubmit}
+        onAddCategory={this.props.onAddCategory}
         currentIndex={this.props.currentIndex}
       />;
 

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import { AddCategory } from './AddCategory';
 import ChevronDownIcon from 'mdi-react/ChevronDownIcon';
-import PlusCircleOutlineIcon from 'mdi-react/PlusCircleOutlineIcon';
 
 export class CategorySelector extends Component {
   constructor(props) {
     super(props);
-
-    console.log(this.props.categoryList[this.props.currentIndex].name);
 
     this.state = {
       dropdownActive: false,
@@ -67,13 +65,9 @@ export class CategorySelector extends Component {
               );
             })}
             <hr className="dropdown-divider"/>
-            <div className="dropdown-item clickable">
-              <span className="is-size-6 has-text-weight-semibold">New category
-                <span className="icon add-note-button">
-                  <PlusCircleOutlineIcon/>
-                </span>
-              </span>
-            </div>
+            <AddCategory 
+              message="New category"
+              onAddCategory={this.props.onAddCategory}/>
           </div>
         </div>
       </div>

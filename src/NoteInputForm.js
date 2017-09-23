@@ -91,6 +91,7 @@ export class NoteInputForm extends Component {
               categoryList={this.props.categoryList}
               currentIndex={this.props.currentIndex}
               onChange={this.changeCategory}
+              onAddCategory={this.props.onAddCategory}
             />
           </div>
         </div>

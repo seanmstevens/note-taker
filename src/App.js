@@ -43,7 +43,8 @@ class App extends Component {
     };
 
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
-    this.handleAddNoteInfo = this.handleAddNoteInfo.bind(this)
+    this.handleAddNoteInfo = this.handleAddNoteInfo.bind(this);
+    this.handleAddNewCategory = this.handleAddNewCategory.bind(this);
     this.handleChangeView = this.handleChangeView.bind(this);
   }
 
@@ -72,6 +73,19 @@ class App extends Component {
       currentRoute: nextLists[listIndex].urlName,
       currentIndex: listIndex
     });
+  }
+
+  handleAddNewCategory(value) {
+    const prevState = this.state;
+    const newState = Object.assign({}, prevState, {
+      categories: this.state.categories.concat({
+        name: value,
+        urlName: value.toLowerCase(),
+        notes: []
+      })
+    });
+    this.setState(newState);
+    console.log(newState);
   }
 
   handleDeleteNote(listIndex, index, value) {
@@ -107,8 +121,6 @@ class App extends Component {
     const category = isAddingNote 
       ? this.state.categories[listIndex].name 
       : this.state.currentNote.category;
-
-    console.log(title, body);
 
     this.setState({
       categories: this.state.categories,
@@ -171,6 +183,7 @@ class App extends Component {
                   <ViewingPanel
                     categoryList={this.state.categories}
                     onSubmit={this.handleAddNoteInfo}
+                    onAddCategory={this.handleAddNewCategory}
                     currentView={this.state.currentView}
                     currentIndex={this.state.currentIndex}
                     noteTitle={this.state.currentNote.title}
