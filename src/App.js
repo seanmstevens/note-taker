@@ -85,7 +85,6 @@ class App extends Component {
       })
     });
     this.setState(newState);
-    console.log(newState);
   }
 
   handleDeleteNote(listIndex, index, value) {
