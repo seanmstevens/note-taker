@@ -8,10 +8,10 @@ export class NoteList extends Component {
 
     return (
       <div>
-        <h2 className="has-text-primary">{name}</h2>
-        <hr/>
+        <h2 className="is-size-4 has-text-weight-semibold has-text-primary">{name}</h2>
+        <hr className="note-divider"/>
         <div>
-          {notes.length > 0 &&
+          {notes.length > 0 ?
             notes.map((note, idx) => {
               if (!note.deleted) {
                 return <NoteItem
@@ -25,9 +25,13 @@ export class NoteList extends Component {
                 />
               }
               return false;
-            })
+            }) : 
+              <div className="has-text-centered has-text-grey-light is-size-6 big-margins">
+                <em>Not a note in sight!</em>
+              </div>
           }
         </div>
+        <hr className="note-divider"/>
       </div>
     );
   }

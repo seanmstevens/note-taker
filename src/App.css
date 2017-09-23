@@ -43,3 +43,11 @@
   background-color: whitesmoke;
   color: #0a0a0a;
 }
+
+.note-divider {
+  margin: .5rem 0;
+}
+
+.big-margins {
+  margin: 1.5rem 0;
+}

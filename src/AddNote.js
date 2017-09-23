@@ -10,7 +10,7 @@ export class AddNote extends Component {
   
   handleClick() {
     const newView = "NoteForm";
-    this.props.onShowForm(newView);
+    this.props.onShowForm(newView, this.props.currentIndex, false);
   }
 
   render() {

@@ -6,9 +6,11 @@ export class CategorySelector extends Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props.categoryList[this.props.currentIndex].name);
+
     this.state = {
       dropdownActive: false,
-      currentCategory: this.props.categoryList[0].name
+      currentCategory: this.props.categoryList[this.props.currentIndex].name
     };
 
     this.handleClick = this.handleClick.bind(this);

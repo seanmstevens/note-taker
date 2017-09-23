@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { CategorySelector } from './CategorySelector';
 
 export class NoteInputForm extends Component {
@@ -6,7 +7,7 @@ export class NoteInputForm extends Component {
     super(props);
 
     this.state = {
-      listIndex: 0,
+      listIndex: this.props.currentIndex,
       noteToAdd: {
         title: '',
         body: ''
@@ -19,12 +20,16 @@ export class NoteInputForm extends Component {
     this.handleNoteSubmit = this.handleNoteSubmit.bind(this);
   }
 
-  handleNoteSubmit() {
+  handleNoteSubmit(history) {
+    // Adding the note information to global app state
     this.props.onSubmit(
       this.state.listIndex,
       this.state.noteToAdd.title,
       this.state.noteToAdd.body
     );
+    // Switching view to route associated with note that was just added
+    let path = this.props.categoryList[this.state.listIndex].urlName;
+    history.push(`/${path}`);
   }
 
   changeTitle(e) {
@@ -59,6 +64,17 @@ export class NoteInputForm extends Component {
   }
 
   render() {
+    const SubmitButton = withRouter(({history}) => {
+      return(
+        <input 
+        type="button" 
+        className="button is-small is-primary" 
+        value="Add Note"
+        onClick={() => {this.handleNoteSubmit(history)}}
+        /> 
+      );     
+    });
+
     return (
       <div>
         <div className="field is-grouped">
@@ -73,24 +89,20 @@ export class NoteInputForm extends Component {
           <div className="control">
             <CategorySelector 
               categoryList={this.props.categoryList}
+              currentIndex={this.props.currentIndex}
               onChange={this.changeCategory}
             />
           </div>
         </div>
         <div className="field">
           <div className="control">
-            <textarea 
+            <textarea
               className="textarea is-small" 
               placeholder="What's on your mind?"
               onChange={e => this.changeBody(e)}></textarea>
           </div>
         </div>
-        <input 
-          type="button" 
-          className="button is-small is-primary" 
-          value="Add Note"
-          onClick={this.handleNoteSubmit}
-        />
+        <SubmitButton/>
       </div>
     );
   }
